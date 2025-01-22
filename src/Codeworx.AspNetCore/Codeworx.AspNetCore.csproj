@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFrameworks>$(SupportedDotNetVersions)</TargetFrameworks>
+		<OutputType>Library</OutputType>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Codeworx.Rest.AspNetCore" />
+	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Codeworx.AspNetCore.Authentication.Introspection\Codeworx.AspNetCore.Authentication.Introspection.csproj" />
+	  <ProjectReference Include="..\Codeworx.Core\Codeworx.Core.csproj" />
+	</ItemGroup>
+
+</Project>

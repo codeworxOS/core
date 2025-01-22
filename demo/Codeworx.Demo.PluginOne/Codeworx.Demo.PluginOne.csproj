@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(SupportedDotNetVersions)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Codeworx.Primitives\Codeworx.Primitives.csproj" />
+    <ProjectReference Include="..\Codeworx.Demo.PluginOne.Contract\Codeworx.Demo.PluginOne.Contract.csproj" />
+  </ItemGroup>
+
+</Project>

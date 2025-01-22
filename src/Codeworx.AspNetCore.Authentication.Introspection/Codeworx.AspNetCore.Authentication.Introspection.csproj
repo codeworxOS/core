@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFrameworks>$(SupportedDotNetVersions)</TargetFrameworks>
+		<OutputType>Library</OutputType>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" />
+	</ItemGroup>
+
+</Project>

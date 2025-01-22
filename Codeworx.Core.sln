@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codeworx.AspNetCore", "src\Codeworx.AspNetCore\Codeworx.AspNetCore.csproj", "{E263FA62-89E0-47B7-850E-6AF346E1E43A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeworx.Primitives", "src\Codeworx.Primitives\Codeworx.Primitives.csproj", "{0EE45E5D-A7AC-448A-B369-6A8F2D1EEBAD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".global", ".global", "{7630185B-2D84-47B6-81A8-71616E0C805E}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		global\stylecop.json = global\stylecop.json
+		global\stylecop.ruleset = global\stylecop.ruleset
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codeworx.Core", "src\Codeworx.Core\Codeworx.Core.csproj", "{A5792B8A-9F5A-458F-967D-62BEA95B6F90}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{13CBE88D-DBA6-49A8-A5BD-D8BF2957EA9A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codeworx.Demo.Hosting", "demo\Codeworx.Demo.Hosting\Codeworx.Demo.Hosting.csproj", "{F273C41C-9D34-40B5-AA45-CA1296732BC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeworx.Demo.PluginOne", "demo\Codeworx.Demo.PluginOne\Codeworx.Demo.PluginOne.csproj", "{BAE942B8-D6CD-4185-9257-E844C54D0CA8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PluginOne", "PluginOne", "{28F8176B-8549-4C9D-BABD-BFC26828477F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeworx.Demo.PluginOne.Contract", "demo\Codeworx.Demo.PluginOne.Contract\Codeworx.Demo.PluginOne.Contract.csproj", "{1F19D5DB-220F-42D0-9ABE-98AC4BB6D9E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeworx.AspNetCore.Authentication.Introspection", "src\Codeworx.AspNetCore.Authentication.Introspection\Codeworx.AspNetCore.Authentication.Introspection.csproj", "{8B59A593-DB32-49F6-99F1-E6787F6219F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E263FA62-89E0-47B7-850E-6AF346E1E43A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E263FA62-89E0-47B7-850E-6AF346E1E43A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E263FA62-89E0-47B7-850E-6AF346E1E43A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E263FA62-89E0-47B7-850E-6AF346E1E43A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EE45E5D-A7AC-448A-B369-6A8F2D1EEBAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EE45E5D-A7AC-448A-B369-6A8F2D1EEBAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EE45E5D-A7AC-448A-B369-6A8F2D1EEBAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EE45E5D-A7AC-448A-B369-6A8F2D1EEBAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5792B8A-9F5A-458F-967D-62BEA95B6F90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5792B8A-9F5A-458F-967D-62BEA95B6F90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5792B8A-9F5A-458F-967D-62BEA95B6F90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5792B8A-9F5A-458F-967D-62BEA95B6F90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F273C41C-9D34-40B5-AA45-CA1296732BC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F273C41C-9D34-40B5-AA45-CA1296732BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F273C41C-9D34-40B5-AA45-CA1296732BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F273C41C-9D34-40B5-AA45-CA1296732BC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAE942B8-D6CD-4185-9257-E844C54D0CA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAE942B8-D6CD-4185-9257-E844C54D0CA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAE942B8-D6CD-4185-9257-E844C54D0CA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAE942B8-D6CD-4185-9257-E844C54D0CA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F19D5DB-220F-42D0-9ABE-98AC4BB6D9E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F19D5DB-220F-42D0-9ABE-98AC4BB6D9E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F19D5DB-220F-42D0-9ABE-98AC4BB6D9E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F19D5DB-220F-42D0-9ABE-98AC4BB6D9E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B59A593-DB32-49F6-99F1-E6787F6219F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B59A593-DB32-49F6-99F1-E6787F6219F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B59A593-DB32-49F6-99F1-E6787F6219F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B59A593-DB32-49F6-99F1-E6787F6219F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F273C41C-9D34-40B5-AA45-CA1296732BC4} = {13CBE88D-DBA6-49A8-A5BD-D8BF2957EA9A}
+		{BAE942B8-D6CD-4185-9257-E844C54D0CA8} = {28F8176B-8549-4C9D-BABD-BFC26828477F}
+		{28F8176B-8549-4C9D-BABD-BFC26828477F} = {13CBE88D-DBA6-49A8-A5BD-D8BF2957EA9A}
+		{1F19D5DB-220F-42D0-9ABE-98AC4BB6D9E8} = {28F8176B-8549-4C9D-BABD-BFC26828477F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {810E07D8-2F88-4C28-A922-59371334E197}
+	EndGlobalSection
+EndGlobal

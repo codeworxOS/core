@@ -1,0 +1,20 @@
+<Project>
+  <ItemGroup>
+    <GlobalPackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556">
+      <PrivateAssets>All</PrivateAssets>
+    </GlobalPackageReference>
+    <GlobalPackageReference Include="Microsoft.SourceLink.Github" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </GlobalPackageReference>
+    <PackageVersion Include="Codeworx.Rest.AspNetCore" Version="2.0.5" />
+    <PackageVersion Include="Codeworx.Rest.Primitives" Version="2.0.5" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.3.0" />
+    <PackageVersion Include="System.Collections.Immutable" Version="8.0.0" />
+  </ItemGroup>
+</Project>

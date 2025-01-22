@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>$(SupportedDotNetVersions)</TargetFrameworks>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Codeworx.Rest.Primitives" />
+	</ItemGroup>
+
+</Project>
