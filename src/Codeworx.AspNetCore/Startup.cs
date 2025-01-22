@@ -45,8 +45,6 @@ namespace Codeworx.AspNetCore
 
             services.AddWebHostingFeature<AuthorizationFeature>(
                                     p => p.Services
-                                        ////.AddSingleton<IAuthorizationHandler, SadeSessionInfoAuthorizationHandler>()
-                                        ////.AddSingleton<IAuthorizationHandler, OperationPermissionAuthorizationHandler>()
                                         .AddAuthorization(options => options.FallbackPolicy = GetFallbackPolicy()),
                                     p => p.UseAuthorization());
 
@@ -68,59 +66,8 @@ namespace Codeworx.AspNetCore
                 {
                     var auth = p.Services.AddAuthentication();
                     auth.AddIntrospection();
-
-                    ////auth.AddOAuth2Introspection(Constants.SadeAuthenticationSchema, options =>
-                    ////{
-                    ////    var retriver = options.TokenRetriever;
-
-                    ////    var authority = p.Configuration.GetValue<string>("Sade:Identity:Authority");
-                    ////    options.Authority = authority;
-                    ////    options.SaveToken = true;
-                    ////    options.EnableCaching = true;
-                    ////    options.ClientCredentialStyle = ClientCredentialStyle.AuthorizationHeader;
-                    ////    options.ClientId = p.Configuration.GetValue<string>("Sade:Identity:ClientId");
-                    ////    options.ClientSecret = p.Configuration.GetValue<string>("Sade:Identity:ClientSecret");
-                    ////    options.TokenRetriever = ctx =>
-                    ////    {
-                    ////        if (ctx.Path.StartsWithSegments("/hub") && ctx.Query.TryGetValue(Constants.AccessToken, out var token))
-                    ////        {
-                    ////            return token;
-                    ////        }
-
-                    ////        return retriver(ctx);
-                    ////    };
-                    ////});
                 },
                 p => p.UseAuthentication());
-
-            ////services.AddWebHostingFeature<IntrospectionFeature>(
-            ////    (ctx, p) =>
-            ////    {
-            ////        var auth = p.Services.AddAuthentication();
-
-            ////        auth.AddOAuth2Introspection(Constants.SadeAuthenticationSchema, options =>
-            ////        {
-            ////            var retriver = options.TokenRetriever;
-
-            ////            var authority = p.Configuration.GetValue<string>("Sade:Identity:Authority");
-            ////            options.Authority = authority;
-            ////            options.SaveToken = true;
-            ////            options.EnableCaching = true;
-            ////            options.ClientCredentialStyle = ClientCredentialStyle.AuthorizationHeader;
-            ////            options.ClientId = p.Configuration.GetValue<string>("Sade:Identity:ClientId");
-            ////            options.ClientSecret = p.Configuration.GetValue<string>("Sade:Identity:ClientSecret");
-            ////            options.TokenRetriever = ctx =>
-            ////            {
-            ////                if (ctx.Path.StartsWithSegments("/hub") && ctx.Query.TryGetValue(Constants.AccessToken, out var token))
-            ////                {
-            ////                    return token;
-            ////                }
-
-            ////                return retriver(ctx);
-            ////            };
-            ////        });
-            ////    },
-            ////    p => p.UseAuthentication());
 
             services.AddWebHostingFeature<CorsFeature>(
                     (ctx, p) =>
