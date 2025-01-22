@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFrameworks>$(SupportedDotNetVersions)</TargetFrameworks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\Codeworx.AspNetCore\Codeworx.AspNetCore.csproj" />
+		<ProjectReference Include="..\..\src\Codeworx.Primitives\Codeworx.Primitives.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Codeworx.Identity.AspNetCore" />
+		<PackageReference Include="Codeworx.Identity.EntityFrameworkCore.Migrations.Sqlite" />
+	</ItemGroup>
+
+</Project>

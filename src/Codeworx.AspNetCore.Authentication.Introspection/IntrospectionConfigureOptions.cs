@@ -60,6 +60,9 @@ internal sealed class IntrospectionConfigureOptions : IConfigureNamedOptions<Int
         options.RefreshInterval = StringHelpers.ParseValueOrDefault(configSection[nameof(options.RefreshInterval)], _invariantTimeSpanParse, options.RefreshInterval);
         options.RequireHttpsMetadata = StringHelpers.ParseValueOrDefault(configSection[nameof(options.RequireHttpsMetadata)], bool.Parse, options.RequireHttpsMetadata);
         options.SaveToken = StringHelpers.ParseValueOrDefault(configSection[nameof(options.SaveToken)], bool.Parse, options.SaveToken);
+
+        options.ClientId = configSection[nameof(options.ClientId)] ?? options.ClientId;
+        options.ClientSecret = configSection[nameof(options.ClientSecret)] ?? options.ClientSecret;
     }
 
     public void Configure(IntrospectionOptions options)

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Codeworx.AspNetCore\Codeworx.AspNetCore.csproj" />
+    <ProjectReference Include="..\Codeworx.Demo.Identity\Codeworx.Demo.Identity.csproj" />
     <ProjectReference Include="..\Codeworx.Demo.PluginOne\Codeworx.Demo.PluginOne.csproj" />
   </ItemGroup>
 

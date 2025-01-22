@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeworx.Demo.PluginOne.Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeworx.AspNetCore.Authentication.Introspection", "src\Codeworx.AspNetCore.Authentication.Introspection\Codeworx.AspNetCore.Authentication.Introspection.csproj", "{8B59A593-DB32-49F6-99F1-E6787F6219F5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{43DEC4F6-0BF8-4CC9-8035-9241B7D5ACA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeworx.Demo.Identity", "demo\Codeworx.Demo.Identity\Codeworx.Demo.Identity.csproj", "{D30672A2-784A-4A2B-B25D-B89B7946EC09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,10 @@ Global
 		{8B59A593-DB32-49F6-99F1-E6787F6219F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B59A593-DB32-49F6-99F1-E6787F6219F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B59A593-DB32-49F6-99F1-E6787F6219F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30672A2-784A-4A2B-B25D-B89B7946EC09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30672A2-784A-4A2B-B25D-B89B7946EC09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30672A2-784A-4A2B-B25D-B89B7946EC09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30672A2-784A-4A2B-B25D-B89B7946EC09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +80,8 @@ Global
 		{BAE942B8-D6CD-4185-9257-E844C54D0CA8} = {28F8176B-8549-4C9D-BABD-BFC26828477F}
 		{28F8176B-8549-4C9D-BABD-BFC26828477F} = {13CBE88D-DBA6-49A8-A5BD-D8BF2957EA9A}
 		{1F19D5DB-220F-42D0-9ABE-98AC4BB6D9E8} = {28F8176B-8549-4C9D-BABD-BFC26828477F}
+		{43DEC4F6-0BF8-4CC9-8035-9241B7D5ACA4} = {13CBE88D-DBA6-49A8-A5BD-D8BF2957EA9A}
+		{D30672A2-784A-4A2B-B25D-B89B7946EC09} = {43DEC4F6-0BF8-4CC9-8035-9241B7D5ACA4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {810E07D8-2F88-4C28-A922-59371334E197}

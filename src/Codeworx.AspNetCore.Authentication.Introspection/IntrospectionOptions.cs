@@ -119,5 +119,15 @@ namespace Codeworx.AspNetCore.Authentication.Introspection
         /// <see cref="AuthenticationProperties"/> after a successful authorization.
         /// </summary>
         public bool SaveToken { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets the client_id for the introspection request.
+        /// </summary>
+        public string ClientId { get; set; } = default!;
+
+        /// <summary>
+        /// Gets or sets the client_secret for the introspection request.
+        /// </summary>
+        public string ClientSecret { get; set; } = default!;
     }
 }
