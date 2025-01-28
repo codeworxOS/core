@@ -30,24 +30,21 @@ internal sealed class IntrospectionConfigureOptions : IConfigureNamedOptions<Int
             return;
         }
 
-        ////var validateIssuer = StringHelpers.ParseValueOrDefault(configSection[nameof(TokenValidationParameters.ValidateIssuer)], bool.Parse, options.TokenValidationParameters.ValidateIssuer);
-        ////var issuer = configSection[nameof(TokenValidationParameters.ValidIssuer)];
-        ////var issuers = configSection.GetSection(nameof(TokenValidationParameters.ValidIssuers)).GetChildren().Select(iss => iss.Value).ToList();
-        ////if (issuer is not null)
-        ////{
-        ////    issuers.Add(issuer);
-        ////}
+        options.ValidateIssuer = StringHelpers.ParseValueOrDefault(configSection[nameof(options.ValidateIssuer)], bool.Parse, options.ValidateIssuer);
+        var issuers = configSection.GetSection(nameof(options.ValidIssuers)).GetChildren().Where(p => p.Value != null).Select(iss => iss.Value!).ToList();
 
-        ////var validateAudience = StringHelpers.ParseValueOrDefault(configSection[nameof(TokenValidationParameters.ValidateAudience)], bool.Parse, options.TokenValidationParameters.ValidateAudience);
-        ////var audience = configSection[nameof(TokenValidationParameters.ValidAudience)];
-        ////var audiences = configSection.GetSection(nameof(TokenValidationParameters.ValidAudiences)).GetChildren().Select(aud => aud.Value).ToList();
-        ////if (audience is not null)
-        ////{
-        ////    audiences.Add(audience);
-        ////}
+        options.ValidateAudience = StringHelpers.ParseValueOrDefault(configSection[nameof(options.ValidateAudience)], bool.Parse, options.ValidateAudience);
+        var audience = configSection[nameof(options.Audience)];
+        var audiences = configSection.GetSection(nameof(options.ValidAudiences)).GetChildren().Where(p => p.Value != null).Select(aud => aud.Value!).ToList();
+        if (audience is not null)
+        {
+            audiences.Add(audience);
+        }
+
+        options.ValidateLifetime = StringHelpers.ParseValueOrDefault(configSection[nameof(options.ValidateLifetime)], bool.Parse, options.ValidateLifetime);
 
         options.Authority = configSection[nameof(options.Authority)] ?? options.Authority;
-        ////options.BackchannelTimeout = StringHelpers.ParseValueOrDefault(configSection[nameof(options.BackchannelTimeout)], _invariantTimeSpanParse, options.BackchannelTimeout);
+        options.BackchannelTimeout = StringHelpers.ParseValueOrDefault(configSection[nameof(options.BackchannelTimeout)], _invariantTimeSpanParse, options.BackchannelTimeout);
         options.Challenge = configSection[nameof(options.Challenge)] ?? options.Challenge;
         options.ForwardAuthenticate = configSection[nameof(options.ForwardAuthenticate)] ?? options.ForwardAuthenticate;
         options.ForwardChallenge = configSection[nameof(options.ForwardChallenge)] ?? options.ForwardChallenge;
@@ -63,6 +60,12 @@ internal sealed class IntrospectionConfigureOptions : IConfigureNamedOptions<Int
 
         options.ClientId = configSection[nameof(options.ClientId)] ?? options.ClientId;
         options.ClientSecret = configSection[nameof(options.ClientSecret)] ?? options.ClientSecret;
+
+        options.ValidateAudience = StringHelpers.ParseValueOrDefault(configSection[nameof(options.ValidateAudience)], bool.Parse, options.ValidateAudience);
+        options.ValidateIssuer = StringHelpers.ParseValueOrDefault(configSection[nameof(options.ValidateIssuer)], bool.Parse, options.ValidateIssuer);
+        options.ClockSkew = StringHelpers.ParseValueOrDefault(configSection[nameof(options.ClockSkew)], _invariantTimeSpanParse, options.ClockSkew);
+
+        options.ValidationParameters = new ValidationParameters(options.ValidateAudience, options.ValidateIssuer, options.ValidateLifetime, issuers, audiences, options.ClockSkew);
     }
 
     public void Configure(IntrospectionOptions options)
@@ -70,32 +73,3 @@ internal sealed class IntrospectionConfigureOptions : IConfigureNamedOptions<Int
         Configure(Options.DefaultName, options);
     }
 }
-
-
-////using System;
-////using Microsoft.AspNetCore.Authentication;
-////using Microsoft.AspNetCore.DataProtection;
-////using Microsoft.Extensions.Options;
-
-////namespace Codeworx.AspNetCore.Authentication.Introspection
-////{
-////    internal sealed class IntrospectionConfigureOptions(IDataProtectionProvider dp) : IConfigureNamedOptions<IntrospectionOptions>
-////    {
-////        private const string _primaryPurpose = "Codeworx.AspNetCore.Authentication.Introspection";
-
-////        public void Configure(string? schemeName, IntrospectionOptions options)
-////        {
-////            if (schemeName is null)
-////            {
-////                return;
-////            }
-
-////            options.AccessTokenProtector = new TicketDataFormat(dp.CreateProtector(_primaryPurpose, schemeName, "AccessToken"));
-////        }
-
-////        public void Configure(IntrospectionOptions options)
-////        {
-////            throw new NotImplementedException();
-////        }
-////    }
-////}

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Codeworx.AspNetCore.Authentication.Introspection
 {
@@ -13,6 +15,8 @@ namespace Codeworx.AspNetCore.Authentication.Introspection
         public IntrospectionOptions()
         {
             Events = new IntrospectionEvents { };
+            ValidIssuers = new List<string>();
+            ValidAudiences = new List<string>();
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenProtector
@@ -23,10 +27,9 @@ namespace Codeworx.AspNetCore.Authentication.Introspection
 
         /// <summary>
         /// Gets or sets a single valid audience value for any received OpenIdConnect token.
-        /// This value is passed into TokenValidationParameters.ValidAudience if that property is empty.
         /// </summary>
         /// <value>
-        /// The expected audience for any received OpenIdConnect token.
+        /// The expected audience claim.
         /// </value>
         public string? Audience { get; set; }
 
@@ -78,8 +81,8 @@ namespace Codeworx.AspNetCore.Authentication.Introspection
         public IConfigurationManager<OpenIdConnectConfiguration>? ConfigurationManager { get; set; }
 
         /// <summary>
-        /// gets or sets the object provided by the application to process events raised by the bearer authentication handler.
-        /// The application may implement the interface fully, or it may create an instance of JwtBearerEvents
+        /// gets or sets the object provided by the application to process events raised by the introspection authentication handler.
+        /// The application may implement the interface fully, or it may create an instance of IntrospectionEvents
         /// and assign delegates only to the events it wants to process.
         /// </summary>
         public new IntrospectionEvents Events
@@ -129,5 +132,42 @@ namespace Codeworx.AspNetCore.Authentication.Introspection
         /// Gets or sets the client_secret for the introspection request.
         /// </summary>
         public string ClientSecret { get; set; } = default!;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the issuer claim (iss) of the introspection response should be validated.
+        /// </summary>
+        public bool ValidateIssuer { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the audience claim (aud) of the introspection response should be validated.
+        /// </summary>
+        public bool ValidateAudience { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the lifetime of the introspection response should be validated.
+        /// </summary>
+        public bool ValidateLifetime { get; set; } = true;
+
+        /// <summary>
+        /// Gets the issuers that will be accepted in the issuer claim (iss) when ValidateIssuer is set to true.
+        /// These values are in addition to the issuer defined in the OpenIdConnectConfiguration received via the metadata document.
+        /// </summary>
+        public List<string> ValidIssuers { get; }
+
+        /// <summary>
+        /// Gets the audiences that will be accepted in the audience claim (aud) when ValidateAudience is set to true.
+        /// These values are in addition to the value defined in the Audience property.
+        /// </summary>
+        public List<string> ValidAudiences { get; }
+
+        /// <summary>
+        /// Gets or sets the clock skew to apply when validating a time.
+        /// </summary>
+        /// <value>
+        /// Defaults to <see cref="TokenValidationParameters.DefaultClockSkew" />.
+        /// </value>
+        public TimeSpan ClockSkew { get; set; } = TokenValidationParameters.DefaultClockSkew;
+
+        public ValidationParameters? ValidationParameters { get; set; }
     }
 }

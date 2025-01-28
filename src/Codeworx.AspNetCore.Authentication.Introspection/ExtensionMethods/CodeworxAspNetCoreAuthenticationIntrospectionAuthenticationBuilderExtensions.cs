@@ -1,4 +1,5 @@
 ﻿using System;
+using Codeworx.AspNetCore.Authentication.Introspection.Cache;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -26,6 +27,7 @@ namespace Codeworx.AspNetCore.Authentication.Introspection.ExtensionMethods
             ArgumentNullException.ThrowIfNull(authenticationScheme);
             ArgumentNullException.ThrowIfNull(configure);
 
+            builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IIntrospectionResponseCache, IntrospectionResponseCache>());
             builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<IntrospectionOptions>, IntrospectionConfigureOptions>());
             builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IPostConfigureOptions<IntrospectionOptions>, IntrospectionPostConfigureOptions>());
             return builder.AddScheme<IntrospectionOptions, IntrospectionAuthenticationHandler>(authenticationScheme, displayName, configure);
