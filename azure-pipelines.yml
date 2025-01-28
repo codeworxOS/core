@@ -2,7 +2,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  major: 1
+  major: 8
   minor: 0
   buildOffset: 0
   packageName: 'Codeworx.Core'
