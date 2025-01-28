@@ -16,6 +16,7 @@
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.1" />
     <PackageVersion Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.3.0" />
+    <PackageVersion Include="NSwag.AspNetCore" Version="14.2.0" />
     <PackageVersion Include="System.Collections.Immutable" Version="8.0.0" />
     <PackageVersion Include="Codeworx.Identity.AspNetCore" Version="1.1.7-beta-11007" />
   </ItemGroup>

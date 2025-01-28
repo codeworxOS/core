@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
@@ -10,7 +11,7 @@ namespace Codeworx.AspNetCore.Authentication.Introspection
 {
     public class IntrospectionOptions : AuthenticationSchemeOptions
     {
-        private ISecureDataFormat<AuthenticationTicket>? _accessTokenProtector;
+        private IDataProtector? _accessTokenProtector;
 
         public IntrospectionOptions()
         {
@@ -19,7 +20,7 @@ namespace Codeworx.AspNetCore.Authentication.Introspection
             ValidAudiences = new List<string>();
         }
 
-        public ISecureDataFormat<AuthenticationTicket> AccessTokenProtector
+        public IDataProtector AccessTokenProtector
         {
             get => _accessTokenProtector ?? throw new InvalidOperationException($"{nameof(AccessTokenProtector)} was not set.");
             set => _accessTokenProtector = value;
@@ -167,6 +168,19 @@ namespace Codeworx.AspNetCore.Authentication.Introspection
         /// Defaults to <see cref="TokenValidationParameters.DefaultClockSkew" />.
         /// </value>
         public TimeSpan ClockSkew { get; set; } = TokenValidationParameters.DefaultClockSkew;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the introspection response should be cached.
+        /// </summary>
+        public bool EnableCache { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets the default cache duration for introspection responses.
+        /// </summary>
+        /// <value>
+        /// Defaults to 00:10:00 />.
+        /// </value>
+        public TimeSpan CacheDuration { get; set; } = TimeSpan.FromMinutes(10);
 
         public ValidationParameters? ValidationParameters { get; set; }
     }

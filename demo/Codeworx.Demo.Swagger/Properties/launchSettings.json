@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Codeworx.Demo.Swagger": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:52075;http://localhost:52076"
+    }
+  }
+}

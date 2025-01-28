@@ -2,18 +2,22 @@
 using System.Globalization;
 using System.Linq;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
 
 namespace Codeworx.AspNetCore.Authentication.Introspection;
 
 internal sealed class IntrospectionConfigureOptions : IConfigureNamedOptions<IntrospectionOptions>
 {
+    private const string _primaryPurpose = "Codeworx.AspNetCore.Authentication.Introspection";
     private static readonly Func<string, TimeSpan> _invariantTimeSpanParse = (string timespanString) => TimeSpan.Parse(timespanString, CultureInfo.InvariantCulture);
     private readonly IAuthenticationConfigurationProvider _authenticationConfigurationProvider;
+    private readonly IDataProtectionProvider _dp;
 
-    public IntrospectionConfigureOptions(IAuthenticationConfigurationProvider configurationProvider)
+    public IntrospectionConfigureOptions(IAuthenticationConfigurationProvider configurationProvider, IDataProtectionProvider dp)
     {
         _authenticationConfigurationProvider = configurationProvider;
+        _dp = dp;
     }
 
     public void Configure(string? name, IntrospectionOptions options)
@@ -29,6 +33,8 @@ internal sealed class IntrospectionConfigureOptions : IConfigureNamedOptions<Int
         {
             return;
         }
+
+        options.AccessTokenProtector = _dp.CreateProtector(_primaryPurpose, name, "AccessToken");
 
         options.ValidateIssuer = StringHelpers.ParseValueOrDefault(configSection[nameof(options.ValidateIssuer)], bool.Parse, options.ValidateIssuer);
         var issuers = configSection.GetSection(nameof(options.ValidIssuers)).GetChildren().Where(p => p.Value != null).Select(iss => iss.Value!).ToList();
@@ -57,6 +63,9 @@ internal sealed class IntrospectionConfigureOptions : IConfigureNamedOptions<Int
         options.RefreshInterval = StringHelpers.ParseValueOrDefault(configSection[nameof(options.RefreshInterval)], _invariantTimeSpanParse, options.RefreshInterval);
         options.RequireHttpsMetadata = StringHelpers.ParseValueOrDefault(configSection[nameof(options.RequireHttpsMetadata)], bool.Parse, options.RequireHttpsMetadata);
         options.SaveToken = StringHelpers.ParseValueOrDefault(configSection[nameof(options.SaveToken)], bool.Parse, options.SaveToken);
+
+        options.EnableCache = StringHelpers.ParseValueOrDefault(configSection[nameof(options.EnableCache)], bool.Parse, options.EnableCache);
+        options.CacheDuration = StringHelpers.ParseValueOrDefault(configSection[nameof(options.CacheDuration)], _invariantTimeSpanParse, options.CacheDuration);
 
         options.ClientId = configSection[nameof(options.ClientId)] ?? options.ClientId;
         options.ClientSecret = configSection[nameof(options.ClientSecret)] ?? options.ClientSecret;

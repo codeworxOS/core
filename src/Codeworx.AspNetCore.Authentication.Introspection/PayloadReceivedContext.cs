@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Codeworx.AspNetCore.Authentication.Introspection
 {
-    public class PayloadReceivedContext : ResultContext<IntrospectionOptions>
+    public class PayloadReceivedContext : BaseContext<IntrospectionOptions>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PayloadReceivedContext"/> class.

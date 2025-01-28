@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json.Nodes;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
@@ -80,73 +81,23 @@ namespace Codeworx.AspNetCore.Authentication.Introspection
                     }
                 }
 
-                var authority = Options.Authority;
+                JwtPayload payload;
 
-                var config = await Options.ConfigurationManager!.GetConfigurationAsync(this.Context.RequestAborted);
-
-                if (string.IsNullOrWhiteSpace(config.IntrospectionEndpoint))
+                if (Options.EnableCache)
                 {
-                    return AuthenticateResult.Fail(new IntrospectionEndpintMissingException { Authority = Options.Authority });
-                }
-
-                var values = new Dictionary<string, string>();
-                values.Add("token", token);
-                values.Add("token_type_hint", "access_token");
-
-                var content = new FormUrlEncodedContent(values);
-
-                var requestMessage = new HttpRequestMessage(HttpMethod.Post, config.IntrospectionEndpoint);
-                requestMessage.Content = content;
-
-                var clientAuthentication = $"{Options.ClientId}:{Options.ClientSecret}";
-
-                requestMessage.Headers.Authorization = new AuthenticationHeaderValue(
-                    "Basic",
-                    Convert.ToBase64String(Encoding.UTF8.GetBytes(clientAuthentication)));
-
-                JwtPayload? payload = null;
-
-                var introspectionResponse = await Options.Backchannel.SendAsync(requestMessage);
-
-                if (introspectionResponse.IsSuccessStatusCode)
-                {
-                    await using (var stream = await introspectionResponse.Content.ReadAsStreamAsync())
-                    {
-                        var node = await JsonNode.ParseAsync(stream);
-                        if (node == null || !(node is JsonObject))
-                        {
-                            return AuthenticateResult.Fail(new IntrospectionInvalidResponseException());
-                        }
-
-                        if (((JsonObject)node).TryGetPropertyValue("active", out var active) && active!.GetValue<bool>())
-                        {
-                            payload = JwtPayload.Deserialize(node.ToJsonString());
-                            var payloadReceivedContext = new PayloadReceivedContext(Context, Scheme, Options, payload);
-
-                            await Events.OnPayloadReceived(payloadReceivedContext);
-
-                            if (payloadReceivedContext.Result != null)
-                            {
-                                return payloadReceivedContext.Result;
-                            }
-
-                            payload = payloadReceivedContext.Payload;
-                        }
-                        else
-                        {
-                            return AuthenticateResult.Fail(new IntrospectionInactiveResponseException());
-                        }
-                    }
+                    payload = await _responseCache.GetOrAddAsync(token, CallIntrospectionEndpointAsync, Context.RequestAborted);
                 }
                 else
                 {
-                    return AuthenticateResult.Fail(new IntrospectionResponseStausCodeException { StatusCode = introspectionResponse.StatusCode });
+                    payload = await CallIntrospectionEndpointAsync(token, Context.RequestAborted);
                 }
 
                 if (payload != null)
                 {
                     if (Options.ValidationParameters != null)
                     {
+                        var config = await Options.ConfigurationManager!.GetConfigurationAsync(this.Context.RequestAborted);
+
                         ValidatePayload(payload, config, Options.ValidationParameters);
                     }
 
@@ -171,8 +122,70 @@ namespace Codeworx.AspNetCore.Authentication.Introspection
                     return authenticationFailedContext.Result;
                 }
 
-                throw;
+                return AuthenticateResult.Fail(ex);
             }
+        }
+
+        protected virtual async Task<JwtPayload> CallIntrospectionEndpointAsync(string token, CancellationToken cancellation)
+        {
+            var authority = Options.Authority;
+            var config = await Options.ConfigurationManager!.GetConfigurationAsync(this.Context.RequestAborted);
+
+            if (string.IsNullOrWhiteSpace(config.IntrospectionEndpoint))
+            {
+                throw new IntrospectionEndpintMissingException { Authority = Options.Authority };
+            }
+
+            var values = new Dictionary<string, string>();
+            values.Add("token", token);
+            values.Add("token_type_hint", "access_token");
+
+            var content = new FormUrlEncodedContent(values);
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, config.IntrospectionEndpoint);
+            requestMessage.Content = content;
+
+            var clientAuthentication = $"{Options.ClientId}:{Options.ClientSecret}";
+
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue(
+                "Basic",
+                Convert.ToBase64String(Encoding.UTF8.GetBytes(clientAuthentication)));
+
+            JwtPayload? payload = null;
+
+            var introspectionResponse = await Options.Backchannel.SendAsync(requestMessage);
+
+            if (introspectionResponse.IsSuccessStatusCode)
+            {
+                await using (var stream = await introspectionResponse.Content.ReadAsStreamAsync())
+                {
+                    var node = await JsonNode.ParseAsync(stream);
+                    if (node == null || !(node is JsonObject))
+                    {
+                        throw new IntrospectionInvalidResponseException();
+                    }
+
+                    if (((JsonObject)node).TryGetPropertyValue("active", out var active) && active!.GetValue<bool>())
+                    {
+                        payload = JwtPayload.Deserialize(node.ToJsonString());
+                        var payloadReceivedContext = new PayloadReceivedContext(Context, Scheme, Options, payload);
+
+                        await Events.OnPayloadReceived(payloadReceivedContext);
+
+                        payload = payloadReceivedContext.Payload;
+                    }
+                    else
+                    {
+                        throw new IntrospectionInactiveResponseException();
+                    }
+                }
+            }
+            else
+            {
+                throw new IntrospectionResponseStausCodeException { StatusCode = introspectionResponse.StatusCode };
+            }
+
+            return payload;
         }
 
         protected override async Task HandleChallengeAsync(AuthenticationProperties properties)

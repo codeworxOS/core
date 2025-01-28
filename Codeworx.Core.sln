@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codeworx.AspNetCore", "src\Codeworx.AspNetCore\Codeworx.AspNetCore.csproj", "{E263FA62-89E0-47B7-850E-6AF346E1E43A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeworx.Primitives", "src\Codeworx.Primitives\Codeworx.Primitives.csproj", "{0EE45E5D-A7AC-448A-B369-6A8F2D1EEBAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codeworx.Primitives", "src\Codeworx.Primitives\Codeworx.Primitives.csproj", "{0EE45E5D-A7AC-448A-B369-6A8F2D1EEBAD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".global", ".global", "{7630185B-2D84-47B6-81A8-71616E0C805E}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,17 +21,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{13CBE88D-D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codeworx.Demo.Hosting", "demo\Codeworx.Demo.Hosting\Codeworx.Demo.Hosting.csproj", "{F273C41C-9D34-40B5-AA45-CA1296732BC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeworx.Demo.PluginOne", "demo\Codeworx.Demo.PluginOne\Codeworx.Demo.PluginOne.csproj", "{BAE942B8-D6CD-4185-9257-E844C54D0CA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codeworx.Demo.PluginOne", "demo\Codeworx.Demo.PluginOne\Codeworx.Demo.PluginOne.csproj", "{BAE942B8-D6CD-4185-9257-E844C54D0CA8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PluginOne", "PluginOne", "{28F8176B-8549-4C9D-BABD-BFC26828477F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeworx.Demo.PluginOne.Contract", "demo\Codeworx.Demo.PluginOne.Contract\Codeworx.Demo.PluginOne.Contract.csproj", "{1F19D5DB-220F-42D0-9ABE-98AC4BB6D9E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codeworx.Demo.PluginOne.Contract", "demo\Codeworx.Demo.PluginOne.Contract\Codeworx.Demo.PluginOne.Contract.csproj", "{1F19D5DB-220F-42D0-9ABE-98AC4BB6D9E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeworx.AspNetCore.Authentication.Introspection", "src\Codeworx.AspNetCore.Authentication.Introspection\Codeworx.AspNetCore.Authentication.Introspection.csproj", "{8B59A593-DB32-49F6-99F1-E6787F6219F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codeworx.AspNetCore.Authentication.Introspection", "src\Codeworx.AspNetCore.Authentication.Introspection\Codeworx.AspNetCore.Authentication.Introspection.csproj", "{8B59A593-DB32-49F6-99F1-E6787F6219F5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{43DEC4F6-0BF8-4CC9-8035-9241B7D5ACA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeworx.Demo.Identity", "demo\Codeworx.Demo.Identity\Codeworx.Demo.Identity.csproj", "{D30672A2-784A-4A2B-B25D-B89B7946EC09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codeworx.Demo.Identity", "demo\Codeworx.Demo.Identity\Codeworx.Demo.Identity.csproj", "{D30672A2-784A-4A2B-B25D-B89B7946EC09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Swagger", "Swagger", "{FEDAB92C-86D2-4701-BF1B-21E725FB38A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeworx.Demo.Swagger", "demo\Codeworx.Demo.Swagger\Codeworx.Demo.Swagger.csproj", "{55589DFA-DC76-42AE-B551-A73F7339E958}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +75,10 @@ Global
 		{D30672A2-784A-4A2B-B25D-B89B7946EC09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D30672A2-784A-4A2B-B25D-B89B7946EC09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D30672A2-784A-4A2B-B25D-B89B7946EC09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55589DFA-DC76-42AE-B551-A73F7339E958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55589DFA-DC76-42AE-B551-A73F7339E958}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55589DFA-DC76-42AE-B551-A73F7339E958}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55589DFA-DC76-42AE-B551-A73F7339E958}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +90,8 @@ Global
 		{1F19D5DB-220F-42D0-9ABE-98AC4BB6D9E8} = {28F8176B-8549-4C9D-BABD-BFC26828477F}
 		{43DEC4F6-0BF8-4CC9-8035-9241B7D5ACA4} = {13CBE88D-DBA6-49A8-A5BD-D8BF2957EA9A}
 		{D30672A2-784A-4A2B-B25D-B89B7946EC09} = {43DEC4F6-0BF8-4CC9-8035-9241B7D5ACA4}
+		{FEDAB92C-86D2-4701-BF1B-21E725FB38A1} = {13CBE88D-DBA6-49A8-A5BD-D8BF2957EA9A}
+		{55589DFA-DC76-42AE-B551-A73F7339E958} = {FEDAB92C-86D2-4701-BF1B-21E725FB38A1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {810E07D8-2F88-4C28-A922-59371334E197}
