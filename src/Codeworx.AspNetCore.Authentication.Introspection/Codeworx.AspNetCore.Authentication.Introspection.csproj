@@ -3,10 +3,11 @@
 	<PropertyGroup>
 		<TargetFrameworks>$(SupportedDotNetVersions)</TargetFrameworks>
 		<OutputType>Library</OutputType>
+		<IsPackable>true</IsPackable>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" />
+		<PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" />
 	</ItemGroup>
 
 </Project>

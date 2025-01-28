@@ -3,6 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>$(SupportedDotNetVersions)</TargetFrameworks>
 		<OutputType>Library</OutputType>
+		<IsPackable>true</IsPackable>
 	</PropertyGroup>
 
 	<ItemGroup>
