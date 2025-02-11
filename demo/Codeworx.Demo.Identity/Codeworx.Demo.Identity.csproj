@@ -8,6 +8,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Codeworx.AspNetCore\Codeworx.AspNetCore.csproj" />
 		<ProjectReference Include="..\..\src\Codeworx.Primitives\Codeworx.Primitives.csproj" />
+		<ProjectReference Include="..\Codeworx.Demo.Swagger\Codeworx.Demo.Swagger.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

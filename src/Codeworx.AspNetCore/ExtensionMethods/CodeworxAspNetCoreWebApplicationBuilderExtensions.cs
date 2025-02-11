@@ -25,21 +25,12 @@ namespace Microsoft.AspNetCore.Builder
             return await builder.ConfigureAsync(options);
         }
 
-        public static async Task<WebApplication> ConfigureAsync(this WebApplicationBuilder builder, HostingOptions options)
+        public static Task<WebApplication> ConfigureAsync(this WebApplicationBuilder builder, HostingOptions options)
         {
-            await builder.ApplyConfigurationAsync(options);
-
-            var app = builder.Build();
-
-            return app;
+            return ConfigureAsync(builder, options, new Type[] { });
         }
 
-        public static Task ApplyConfigurationAsync(this WebApplicationBuilder builder, HostingOptions options)
-        {
-            return ApplyConfigurationAsync(builder, options, new Type[] { });
-        }
-
-        public static Task ApplyConfigurationAsync(this WebApplicationBuilder builder, HostingOptions options, params Type[] excludeFeatures)
+        public static Task<WebApplication> ConfigureAsync(this WebApplicationBuilder builder, HostingOptions options, params Type[] excludeFeatures)
         {
             using var loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
                 .SetMinimumLevel(LogLevel.Trace)
@@ -95,9 +86,17 @@ namespace Microsoft.AspNetCore.Builder
                 foreach (var item in features.OrderBy(p => p.Value.SortOrder))
                 {
                     var processorType = typeof(IHostingFeatureProcessor<>).MakeGenericType(item.Key);
-                    var processor = (IHostingFeatureProcessor<IHostingFeature>)scope.ServiceProvider.GetRequiredService(processorType);
+                    var featureProcessors = (IEnumerable<IHostingFeatureProcessor<IHostingFeature>>)scope.ServiceProvider.GetServices(processorType);
 
-                    processors.Add(processor);
+                    if (!featureProcessors.Any())
+                    {
+                        throw new NotImplementedException($"No feature processor for feature {item.Key} found.");
+                    }
+
+                    foreach (var processor in featureProcessors)
+                    {
+                        processors.Add(processor);
+                    }
                 }
 
                 foreach (var item in processors)

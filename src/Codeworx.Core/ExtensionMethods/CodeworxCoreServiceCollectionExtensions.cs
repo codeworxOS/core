@@ -37,13 +37,13 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddHostingFeature<TFeature>(this IServiceCollection services, Action<IServiceBuilder> applyServices)
                                  where TFeature : IHostingFeature, new()
         {
-            return services.AddOrReplace<IHostingFeatureProcessor<TFeature>, DelegateFeatureProcessor<TFeature>>(ServiceLifetime.Transient, sp => new DelegateFeatureProcessor<TFeature>((ctx, p) => applyServices(p)));
+            return services.AddTransient<IHostingFeatureProcessor<TFeature>, DelegateFeatureProcessor<TFeature>>(sp => new DelegateFeatureProcessor<TFeature>((ctx, p) => applyServices(p)));
         }
 
         public static IServiceCollection AddHostingFeature<TFeature>(this IServiceCollection services, Action<IHostingContext, IServiceBuilder> applyServices)
             where TFeature : IHostingFeature, new()
         {
-            return services.AddOrReplace<IHostingFeatureProcessor<TFeature>, DelegateFeatureProcessor<TFeature>>(ServiceLifetime.Transient, sp => new DelegateFeatureProcessor<TFeature>(applyServices));
+            return services.AddTransient<IHostingFeatureProcessor<TFeature>, DelegateFeatureProcessor<TFeature>>(sp => new DelegateFeatureProcessor<TFeature>(applyServices));
         }
 
         public static IServiceCollection AddOrReplace<TService, TImplementation>(this IServiceCollection services, ServiceLifetime lifetime, Func<TImplementation> factory)

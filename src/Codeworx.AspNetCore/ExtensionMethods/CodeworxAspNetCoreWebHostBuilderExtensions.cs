@@ -84,8 +84,17 @@ namespace Microsoft.AspNetCore.Builder
                     foreach (var item in features.OrderBy(p => p.Value.SortOrder))
                     {
                         var processorType = typeof(IHostingFeatureProcessor<>).MakeGenericType(item.Key);
-                        var processor = (IHostingFeatureProcessor<IHostingFeature>)scope.ServiceProvider.GetRequiredService(processorType);
-                        processors.Add(processor);
+                        var featureProcessors = (IEnumerable<IHostingFeatureProcessor<IHostingFeature>>)scope.ServiceProvider.GetServices(processorType);
+
+                        if (!featureProcessors.Any())
+                        {
+                            throw new NotImplementedException($"No feature processor for feature {item.Key} found.");
+                        }
+
+                        foreach (var processor in featureProcessors)
+                        {
+                            processors.Add(processor);
+                        }
                     }
 
                     foreach (var item in processors)

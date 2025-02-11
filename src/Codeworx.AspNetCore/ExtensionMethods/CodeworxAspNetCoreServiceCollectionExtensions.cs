@@ -19,13 +19,13 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddWebHostingFeature<TFeature>(this IServiceCollection services, Action<IHostingContext, IServiceBuilder> applyServices, Action<IAppRegistrationBuilder> buildPipeline)
                     where TFeature : IHostingFeature, new()
         {
-            return services.AddOrReplace<IHostingFeatureProcessor<TFeature>, DelegateWebFeatureProcessor<TFeature>>(ServiceLifetime.Transient, sp => new DelegateWebFeatureProcessor<TFeature>(applyServices, buildPipeline));
+            return services.AddTransient<IHostingFeatureProcessor<TFeature>, DelegateWebFeatureProcessor<TFeature>>(sp => new DelegateWebFeatureProcessor<TFeature>(applyServices, buildPipeline));
         }
 
         public static IServiceCollection AddWebHostingFeature<TFeature>(this IServiceCollection services, Action<IServiceBuilder> applyServices, Action<IAppRegistrationBuilder> buildPipeline)
                             where TFeature : IHostingFeature, new()
         {
-            return services.AddOrReplace<IHostingFeatureProcessor<TFeature>, DelegateWebFeatureProcessor<TFeature>>(ServiceLifetime.Transient, sp => new DelegateWebFeatureProcessor<TFeature>((ctx, p) => applyServices(p), buildPipeline));
+            return services.AddTransient<IHostingFeatureProcessor<TFeature>, DelegateWebFeatureProcessor<TFeature>>(sp => new DelegateWebFeatureProcessor<TFeature>((ctx, p) => applyServices(p), buildPipeline));
         }
     }
 }

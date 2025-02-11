@@ -26,9 +26,9 @@ namespace Codeworx.Demo.Swagger
         public void Configure(IServiceCollection services)
         {
             services.AddWebHostingFeature<SwaggerFeature>(
-                p => p.Services.AddOpenApiDocument(options =>
+                p => p.Services.AddOpenApiDocument((options, sp) =>
                 {
-                    options.Title = "Codeworx Demo Services";
+                    options.Title = sp.GetService<ISwaggerTitle>()?.Title ?? "Codeworx Demo Services";
 
                     var url = p.Configuration.GetValue<string>("Authentication:Schemes:Introspection:Authority");
 
