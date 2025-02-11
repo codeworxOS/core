@@ -101,8 +101,18 @@ namespace Codeworx.AspNetCore.Authentication.Introspection
                         ValidatePayload(payload, config, Options.ValidationParameters);
                     }
 
+                    var properties = new AuthenticationProperties();
+
+                    if (Options.SaveToken)
+                    {
+                        properties.StoreTokens(new[]
+                        {
+                            new AuthenticationToken { Name = "access_token", Value = token }
+                        });
+                    }
+
                     var principal = new ClaimsPrincipal(new ClaimsIdentity(payload.Claims, this.Scheme.Name));
-                    return AuthenticateResult.Success(new AuthenticationTicket(principal, this.Scheme.Name));
+                    return AuthenticateResult.Success(new AuthenticationTicket(principal, properties, this.Scheme.Name));
                 }
 
                 return AuthenticateResult.Fail(new IntrospectionInvalidResponseException());
